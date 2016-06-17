@@ -1533,6 +1533,7 @@ def compute_md5_for_file_asbase64(filename, pagealign=False, blocksize=65536):
         x = xattr.xattr(filename)
         set_x = True
         if x['user.md5_mtime'] == mtime:
+            print('reading %s from xattr' % base64encode(x['user.md5']))
             return base64encode(x['user.md5'])
     except:
         pass
