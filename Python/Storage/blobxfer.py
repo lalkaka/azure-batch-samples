@@ -1525,7 +1525,7 @@ def compute_md5_for_file_asbase64(filename, pagealign=False, blocksize=65536):
         Nothing
     """
     try:
-        mtime = os.path.getmtime(filename)
+        mtime = bytes(os.path.getmtime(filename))
     except OSError:
         mtime = 0
         
