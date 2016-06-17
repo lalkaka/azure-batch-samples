@@ -91,6 +91,9 @@ except ImportError:  # pragma: no cover
     pass
 import requests
 
+import os.path
+import xattr
+
 # remap keywords for Python3
 # pylint: disable=W0622,C0103
 try:
@@ -1527,15 +1530,12 @@ def compute_md5_for_file_asbase64(filename, pagealign=False, blocksize=65536):
         mtime = 0
         
     try:
-        import xattr
         x = xattr.xattr(filename)
         set_x = True
         if x['md5_mtime'] == mtime:
             return x['md5']
-    except ImportError:
-        pass
     except:
-        print('xattr error')
+        pass
     
     hasher = hashlib.md5()
     with open(filename, 'rb') as filedesc:
