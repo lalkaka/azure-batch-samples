@@ -93,6 +93,7 @@ import requests
 
 import os.path
 import xattr
+import urllib
 
 # remap keywords for Python3
 # pylint: disable=W0622,C0103
@@ -1685,8 +1686,8 @@ def split_fileshare_path_into_parts(remotefname):
     Raises:
         Nothing
     """
-    fname = remotefname.split(os.path.sep)[-1]
-    dirname = remotefname.rstrip(os.path.sep + fname)
+    fname = urllib.quote_plus(remotefname.split(os.path.sep)[-1])
+    dirname = urllib.quote_plus(remotefname.rstrip(os.path.sep + fname))
     return (dirname, fname)
 
 
